@@ -32,8 +32,7 @@ export const HeroSection = () => {
               <Link href="#">Fazer parte agora</Link>
             </Button>
             <Button
-              className="text-white hover:text-[#C40D3A] rounded-full font-medium border hover:border-[#C40D3A] border-white hover:bg-transparent"
-              variant="ghost"
+              className="text-white bg-transparent rounded-full font-medium border border-white hover:bg-white/20"
               asChild
             >
               <Link href="#">
