@@ -109,12 +109,14 @@ export function TestimonialsSection() {
             {getCurrentTestimonials().map((testimonial, index) => (
               <Card
                 key={testimonial.id}
-                className={`px-5.5 py-11.5 border-[#E7E0E2] shadow-none flex flex-col animate-in fade-in-0 slide-in-from-left-4 duration-700 transition-all ${
-                  index === 1 ? "w-[472px] h-[284px] opacity-100" : "w-[348px] h-[208px] opacity-50"
+                className={`border-[#E7E0E2] shadow-none flex flex-col animate-in fade-in-0 slide-in-from-left-4 duration-700 transition-all ${
+                  index === 1
+                    ? "w-[472px] h-[284px] opacity-100 px-[48px] py-[48px]"
+                    : "w-[348px] h-[208px] opacity-50 px-6 py-6"
                 }`}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <CardHeader className="flex items-start gap-4 flex-col">
+                <CardHeader className="flex items-start gap-4 flex-col px-0">
                   <div>
                     <p className="text-[#2E1118] font-semibold">{testimonial.name}</p>
                     <div className="flex items-center gap-2 mt-1">
