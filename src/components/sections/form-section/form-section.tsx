@@ -12,7 +12,7 @@ import { z } from "zod";
 const formSectionSchema = z.object({
   name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
   email: z.email("E-mail inválido"),
-  phone: z.string().min(10, "Favor informar o telefone"),
+  phone: z.string().min(8, "Favor informar o telefone"),
   gender: z.string().refine((val) => val !== "select-gender", "Selecione um gênero"),
   state: z.string().refine((val) => val !== "state", "Selecione um estado"),
   position: z.string().refine((val) => val !== "position", "Selecione um cargo"),
