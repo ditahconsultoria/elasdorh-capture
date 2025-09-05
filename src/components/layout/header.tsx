@@ -26,7 +26,7 @@ export function Header() {
         </div>
       </Link>
 
-      <nav className="hidden md:flex items-center gap-2">
+      <nav className="hidden md:flex items-center gap-2 ml-16">
         <Button
           className="hover:bg-[#FCE3EC] hover:text-[#C40D3A] text-[#746266] font-medium w-[75px] h-10"
           variant="ghost"
@@ -51,7 +51,7 @@ export function Header() {
       </nav>
 
       <Button
-        className="hidden md:flex bg-[#C40D3A] hover:bg-[#C40D3A] text-white rounded-full font-medium h-12 w-48"
+        className="hidden md:flex bg-[#C40D3A] hover:bg-[#d21444] text-white rounded-full font-medium h-12 w-48 duration-300"
         asChild
       >
         <Link href="#">Fazer parte agora</Link>

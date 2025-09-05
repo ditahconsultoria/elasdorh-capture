@@ -10,6 +10,7 @@ import { TrevoIcon } from "../icons/trevo-icon";
 
 export function AboutSection() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const paragraphs = [
     "Com diálogos verdadeiros, profundos e cheios de significado, criamos espaços que despertam insights e impulsionam mudanças reais.",
@@ -48,21 +49,33 @@ export function AboutSection() {
   ];
 
   const images = [
-    "/hero-banner.svg",
-    "/event-photo-1.svg",
-    "/event-photo-2.svg",
-    "/event-photo-3.svg",
-    "/event-photo-4.svg",
-    "/event-photo-5.svg",
+    "/event-picture-1.svg",
+    "/event-picture-2.svg",
+    "/event-picture-3.svg",
+    "/event-picture-4.svg",
+    "/event-picture-5.svg",
   ];
+
+  // Criar array com duplicação para carousel infinito
+  const infiniteImages = [...images, images[0]];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
-    }, 10000);
+      setIsTransitioning(true);
+      setCurrentImageIndex((prevIndex) => prevIndex + 1);
+
+      setTimeout(() => {
+        if (currentImageIndex === images.length - 1) {
+          setIsTransitioning(false);
+          setCurrentImageIndex(0);
+        } else {
+          setIsTransitioning(false);
+        }
+      }, 700);
+    }, 6000);
 
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [currentImageIndex, images.length]);
 
   return (
     <section className="w-full bg-pink-50 relative overflow-hidden">
@@ -115,7 +128,7 @@ export function AboutSection() {
             </div>
 
             <Button
-              className="bg-[#C40D3A] hover:bg-[#C40D3A] text-white rounded-full font-medium h-12 w-[225px] mt-12"
+              className="text-white rounded-full h-12 w-[225px] mt-12 bg-[#C40D3A] hover:bg-[#d21444] font-medium duration-300"
               asChild
             >
               <Link href="#">
@@ -126,12 +139,26 @@ export function AboutSection() {
 
           <div className="w-full md:w-auto hidden lg:block">
             <div className="relative h-[300px] md:h-[457px] w-full md:w-[580px] overflow-hidden rounded-lg">
-              <Image
-                src={images[currentImageIndex]}
-                alt={`Elas ${currentImageIndex + 1}`}
-                fill
-                className="object-cover transition-opacity duration-500 rounded-2xl"
-              />
+              <div
+                className={`flex h-full transition-transform duration-700 ease-in-out ${
+                  isTransitioning ? "" : "transition-none"
+                }`}
+                style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
+              >
+                {infiniteImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className="w-full h-full flex-shrink-0 relative"
+                  >
+                    <Image
+                      src={image}
+                      alt={`Elas ${(index % images.length) + 1}`}
+                      fill
+                      className="object-cover rounded-2xl"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
