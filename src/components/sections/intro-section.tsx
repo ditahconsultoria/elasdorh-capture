@@ -1,13 +1,15 @@
-<<<<<<< HEAD:src/components/sections/intro-section.tsx
-=======
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import Link from "next/link";
->>>>>>> 44e136f (feat(IntroSection): Adicionado componente Button no lugar do atributo <a>):src/components/sections/IntroSection.tsx
 import { FaArrowRightLong } from "react-icons/fa6";
 import { TrevoIcon } from "../icons/trevo-icon";
 
-const InfoCard = ({ title, children }: { title: string; children: React.ReactNode }) => (
+const InfoCard = ({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) => (
   <div className="bg-white p-8 rounded-2xl text-left">
     <h2 className="text-xl font-semibold text-gray-800 mb-4">{title}</h2>
     <p className="text-gray-600 leading-relaxed">{children}</p>
@@ -25,8 +27,11 @@ export const IntroSection = () => {
               <p className="font-medium text-2xl">Você não está sozinha!</p>
             </div>
             <h1 className="text-4xl md:text-[32px] font-medium leading-tight max-w-4xl">
-              Aqui, mulheres de RH encontram <span className="font-semibold">apoio, trocas reais e conexões</span>, que
-              fortalecem suas jornadas profissionais.
+              Aqui, mulheres de RH encontram{" "}
+              <span className="font-semibold">
+                apoio, trocas reais e conexões
+              </span>
+              , que fortalecem suas jornadas profissionais.
             </h1>
           </div>
           <Button
@@ -45,13 +50,16 @@ export const IntroSection = () => {
         <div className="mt-20">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <InfoCard title="Conexão de verdade">
-              Crie laços com mulheres que compartilham dos mesmos desafios e que acreditam no poder das conexões.
+              Crie laços com mulheres que compartilham dos mesmos desafios e que
+              acreditam no poder das conexões.
             </InfoCard>
             <InfoCard title="Trocas que inspiram">
-              Ouça experiências, aprendizados e histórias que podem impulsionam sua carreira no RH.
+              Ouça experiências, aprendizados e histórias que podem impulsionam
+              sua carreira no RH.
             </InfoCard>
             <InfoCard title="Crescimento Juntas">
-              Seja protagonista da sua trajetória com o apoio de uma rede que caminha lado a lado com você.
+              Seja protagonista da sua trajetória com o apoio de uma rede que
+              caminha lado a lado com você.
             </InfoCard>
           </div>
         </div>
