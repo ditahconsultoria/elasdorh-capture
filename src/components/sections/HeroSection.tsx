@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { MoveRight } from "lucide-react";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 export const HeroSection = () => {
   return (
     <section className="relative flex items-center justify-center text-center text-white">
-      <div className="max-w-[1256px] mx-auto px-6 py-[218px]">
+      <div className="max-w-[78.5rem] mx-auto px-6 py-[13.625rem]">
         <Image
           src="/hero-banner.svg"
           alt="Pessoas reunidas"
@@ -17,26 +17,26 @@ export const HeroSection = () => {
         <div className="absolute inset-0 bg-black/50" />
 
         <div className="relative z-10">
-          <h1 className="text-[3.5rem] font-semibold leading-none px-24">
-            Onde mulheres incríveis se encontram para{" "}
-            <span className="text-[#FFB8CA]">transformar o RH</span>
+          <h1 className="md:text-[3.5rem] font-semibold leading-none md:px-24 text-4xl">
+            Onde mulheres incríveis se encontram para <span className="text-[#FFB8CA]">transformar o RH</span>
           </h1>
-          <p className="text-[#E7E0E2] mt-4 text-2xl">
-            Vamos dominar o mundo e precisamos de você conosco!
-          </p>
-          <div className="mt-6 flex gap-4 justify-center">
+          <p className="text-[#E7E0E2] mt-4 text-2xl">Vamos dominar o mundo e precisamos de você conosco!</p>
+          <div className="mt-6 flex flex-col md:flex-row items-center gap-4 justify-center">
             <Button
-              className="bg-[#C40D3A] hover:bg-[#C40D3A] text-white rounded-full font-medium"
+              className="bg-[#C40D3A] hover:bg-[#C40D3A] text-white rounded-full font-medium h-12 w-48"
               asChild
             >
               <Link href="#">Fazer parte agora</Link>
             </Button>
             <Button
-              className="text-white bg-transparent rounded-full font-medium border border-white hover:bg-white/20"
+              className="text-white bg-transparent rounded-full font-medium border border-white hover:bg-white/20 h-12 w-[10.3125rem]"
               asChild
             >
-              <Link href="#">
-                Sobre nós <MoveRight />
+              <Link
+                href="#"
+                className=""
+              >
+                Sobre nós <FaArrowRightLong />
               </Link>
             </Button>
           </div>
