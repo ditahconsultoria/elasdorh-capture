@@ -1,4 +1,10 @@
-import { ArrowIcon } from "../icons/arrow-icon";
+<<<<<<< HEAD:src/components/sections/intro-section.tsx
+=======
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import Link from "next/link";
+>>>>>>> 44e136f (feat(IntroSection): Adicionado componente Button no lugar do atributo <a>):src/components/sections/IntroSection.tsx
+import { FaArrowRightLong } from "react-icons/fa6";
 import { TrevoIcon } from "../icons/trevo-icon";
 
 const InfoCard = ({ title, children }: { title: string; children: React.ReactNode }) => (
@@ -23,12 +29,17 @@ export const IntroSection = () => {
               fortalecem suas jornadas profissionais.
             </h1>
           </div>
-          <a
-            href="#"
-            className="self-center md:self-auto inline-flex items-center justify-center gap-2 bg-[#FFB8CA] text-[#C40D3A] py-3 px-6 rounded-full hover:opacity-90 transition-opacity whitespace-nowrap"
+          <Button
+            className="bg-[#FFB8CA] text-[#C40D3A] rounded-full py-6 has-[>svg]:px-6 hover:bg-[#FFB8CA]/90 duration-300"
+            asChild
           >
-            Junte-se a nós <ArrowIcon />
-          </a>
+            <Link
+              href="#"
+              className="inline-flex items-center justify-center gap-2"
+            >
+              Junte-se a nós <FaArrowRightLong />
+            </Link>
+          </Button>
         </div>
 
         <div className="mt-20">
