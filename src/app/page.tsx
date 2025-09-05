@@ -3,6 +3,7 @@ import { IntroSection } from "@/components/sections/intro-section";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { AboutSection } from "@/components/sections/about-section";
+import { FormSection } from "@/components/sections/form-section/form-section";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <HeroSection />
       <IntroSection />
       <AboutSection />
+      <FormSection />
       <Footer />
     </>
   );
