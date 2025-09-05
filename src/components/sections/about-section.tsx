@@ -49,12 +49,11 @@ export function AboutSection() {
   ];
 
   const images = [
-    "/hero-banner.svg",
-    "/event-photo-1.svg",
-    "/event-photo-2.svg",
-    "/event-photo-3.svg",
-    "/event-photo-4.svg",
-    "/event-photo-5.svg",
+    "/event-picture-1.svg",
+    "/event-picture-2.svg",
+    "/event-picture-3.svg",
+    "/event-picture-4.svg",
+    "/event-picture-5.svg",
   ];
 
   // Criar array com duplicação para carousel infinito
