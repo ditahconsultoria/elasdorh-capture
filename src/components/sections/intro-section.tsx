@@ -1,4 +1,4 @@
-import { ArrowIcon } from "../icons/arrow-icon";
+import { FaArrowRightLong } from "react-icons/fa6";
 import { TrevoIcon } from "../icons/trevo-icon";
 
 const InfoCard = ({ title, children }: { title: string; children: React.ReactNode }) => (
@@ -27,7 +27,7 @@ export const IntroSection = () => {
             href="#"
             className="self-center md:self-auto inline-flex items-center justify-center gap-2 bg-[#FFB8CA] text-[#C40D3A] py-3 px-6 rounded-full hover:opacity-90 transition-opacity whitespace-nowrap"
           >
-            Junte-se a nós <ArrowIcon />
+            Junte-se a nós <FaArrowRightLong />
           </a>
         </div>
 
