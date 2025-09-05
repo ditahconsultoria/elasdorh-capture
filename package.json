@@ -1,6 +1,6 @@
 {
   "name": "elasdorh-capture",
-  "version": "0.1.0",
+  "version": "development",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
