@@ -5,8 +5,8 @@ import { MoveRight } from "lucide-react";
 
 export const HeroSection = () => {
   return (
-    <section className="relative flex items-center h-[800px] justify-center text-center text-white">
-      <div className="max-w-[1256px] mx-auto px-6">
+    <section className="relative flex items-center justify-center text-center text-white">
+      <div className="max-w-[1256px] mx-auto px-6 py-[218px]">
         <Image
           src="/hero-banner.svg"
           alt="Pessoas reunidas"
