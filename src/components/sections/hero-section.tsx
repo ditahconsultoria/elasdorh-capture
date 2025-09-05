@@ -18,24 +18,21 @@ export const HeroSection = () => {
 
         <div className="relative z-10">
           <h1 className="md:text-[3.5rem] font-semibold leading-none md:px-24 text-4xl">
-            Onde mulheres incríveis se encontram para <span className="text-[#FFB8CA]">transformar o RH</span>
+            Onde mulheres incríveis se encontram para{" "}
+            <span className="text-[#FFB8CA]">transformar o RH</span>
           </h1>
-          <p className="text-[#E7E0E2] mt-4 text-2xl">Vamos dominar o mundo e precisamos de você conosco!</p>
+          <p className="text-[#E7E0E2] mt-4 text-2xl">
+            Vamos dominar o mundo e precisamos de você conosco!
+          </p>
           <div className="mt-6 flex flex-col md:flex-row items-center gap-4 justify-center">
             <Button
-              className="bg-[#C40D3A] hover:bg-[#C40D3A] text-white rounded-full font-medium h-12 w-48"
+              className="bg-[#C40D3A] hover:bg-[#d21444] text-white rounded-full font-medium h-12 w-48 duration-300"
               asChild
             >
               <Link href="#">Fazer parte agora</Link>
             </Button>
-            <Button
-              className="text-white bg-transparent rounded-full font-medium border border-white hover:bg-white/20 h-12 w-[10.3125rem]"
-              asChild
-            >
-              <Link
-                href="#"
-                className=""
-              >
+            <Button asChild variant="outline" size={"lg"}>
+              <Link href="#">
                 Sobre nós <FaArrowRightLong />
               </Link>
             </Button>
