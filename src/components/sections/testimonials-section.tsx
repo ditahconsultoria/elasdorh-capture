@@ -20,7 +20,7 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 2,
-    name: "Rafael Mendes",
+    name: "Ana Carolina Mendes",
     role: "Participante da 1ª edição",
     text: "Apenas continuem, foi realmente muito bem organizado, com atenção em cada detalhe, comunicação perfeita e sobretudo com um brilho nos olhos que não dá pra passar despercebido. Parabéns!",
   },
@@ -32,7 +32,7 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 4,
-    name: "Diego Fernandes",
+    name: "Débora Fernandes",
     role: "Participante da 1ª edição",
     text: "Uma experiência transformadora que mudou minha perspectiva sobre conexões profissionais.",
   },
@@ -44,9 +44,9 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 6,
-    name: "Thiago Alves",
+    name: "Thaís Alves",
     role: "Participante da 1ª edição",
-    text: "Recomendo para todos que buscam crescimento profissional e pessoal. Foi uma experiência única!",
+    text: "Recomendo para todas que buscam crescimento profissional e pessoal. Foi uma experiência única!",
   },
   {
     id: 7,
@@ -56,9 +56,9 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 8,
-    name: "Gabriel Lima",
+    name: "Gabriela Lima",
     role: "Participante da 1ª edição",
-    text: "Evento excepcional! A qualidade dos participantes e a organização foram impressionantes.",
+    text: "Evento excepcional! A qualidade das participantes e a organização foram impressionantes.",
   },
   {
     id: 9,
@@ -70,8 +70,20 @@ const testimonials: Testimonial[] = [
 
 export function TestimonialsSection() {
   const [currentGroup, setCurrentGroup] = useState(0);
-  const itemsPerGroup = 3;
+  const [isMobile, setIsMobile] = useState(false);
+  const itemsPerGroup = isMobile ? 1 : 3;
   const totalGroups = Math.ceil(testimonials.length / itemsPerGroup);
+
+  useEffect(() => {
+    function checkScreenSize() {
+      setIsMobile(window.innerWidth < 768);
+    }
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
 
   function getCurrentTestimonials() {
     const startIndex = currentGroup * itemsPerGroup;
@@ -110,7 +122,9 @@ export function TestimonialsSection() {
               <Card
                 key={testimonial.id}
                 className={`border-[#E7E0E2] shadow-none flex flex-col animate-in fade-in-0 slide-in-from-left-4 duration-700 transition-all ${
-                  index === 1
+                  isMobile
+                    ? "w-full max-w-[348px] h-[208px] opacity-100 px-6 py-6"
+                    : index === 1
                     ? "w-[472px] h-[284px] opacity-100 px-[48px] py-[48px]"
                     : "w-[348px] h-[208px] opacity-50 px-6 py-6"
                 }`}

@@ -19,8 +19,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      <body className={poppins.className}>{children}</body>
+    <html
+      lang="pt-BR"
+      className="h-full"
+    >
+      <body className={`${poppins.className} min-h-screen flex flex-col`}>
+        <div className="flex-1">{children}</div>
+      </body>
     </html>
   );
 }

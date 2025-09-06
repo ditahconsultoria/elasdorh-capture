@@ -56,7 +56,6 @@ export function AboutSection() {
     "/event-picture-5.svg",
   ];
 
-  // Criar array com duplicação para carousel infinito
   const infiniteImages = [...images, images[0]];
 
   useEffect(() => {
