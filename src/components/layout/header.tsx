@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
+import { RxCross1 } from "react-icons/rx";
 import { useState } from "react";
 import { SlMenu } from "react-icons/sl";
 
