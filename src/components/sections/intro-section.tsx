@@ -13,14 +13,14 @@ const InfoCard = ({ title, children }: { title: string; children: React.ReactNod
 export const IntroSection = () => {
   return (
     <section className="bg-[#C40D3A] w-full">
-      <div className="max-w-[1256px] mx-auto px-6 py-[100px]">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 md:gap-4 text-white">
-          <div className="md:text-left text-center">
-            <div className="flex items-center justify-center md:justify-start gap-4 mb-4">
+      <div className="max-w-[1256px] mx-auto px-6 py-[100px] ">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 md:gap-4 text-white ">
+          <div className="md:text-left text-start">
+            <div className="flex items-center md:justify-start gap-4 mb-4">
               <TrevoIcon className="w-10.5 h-10.5 text-white" />
               <p className="font-medium text-2xl">Você não está sozinha!</p>
             </div>
-            <h1 className="text-4xl md:text-[32px] font-medium leading-tight max-w-4xl">
+            <h1 className="text-4xl md:text-[32px] font-medium leading-tight max-w-4xl ">
               Aqui, mulheres de RH encontram <span className="font-semibold">apoio, trocas reais e conexões</span>, que
               fortalecem suas jornadas profissionais.
             </h1>

@@ -7,11 +7,11 @@ import { PiLinkedinLogoFill } from "react-icons/pi";
 export function FormSection() {
   return (
     <section className="w-full bg-pink-50 relative overflow-hidden">
+      <div className="absolute lg:top-5 lg:right-4 z-0 top-[620px] -right-[55px]">
+        <TrevoIcon className="lg:w-[331px] lg:h-[331px] w-[200px] h-[200px] text-[#FFE9F0]" />
+      </div>
       <div className="max-w-[1256px] mx-auto px-6 py-[100px] flex flex-col items-center justify-center relative z-10">
-        <div className="absolute top-5 -right-28 z-0 hidden lg:block">
-          <TrevoIcon className="w-[331px] h-[331px] text-[#FFE9F0] lg:block hidden" />
-        </div>
-        <div className="flex flex-col md:flex-row justify-center items-center gap-16">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-16 w-full">
           <div className="flex flex-col max-w-[588px]">
             <div className="flex items-center gap-4">
               <TrevoIcon className="w-10.5 h-10.5 text-[#C40D3A]" />

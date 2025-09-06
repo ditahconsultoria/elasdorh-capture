@@ -78,10 +78,10 @@ export function AboutSection() {
 
   return (
     <section className="w-full bg-pink-50 relative overflow-hidden">
+      <div className="absolute lg:top-20 lg:-right-22 z-0 top-[935px] -right-[55px]">
+        <TrevoIcon className="lg:w-[605px] lg:h-[605px] w-[200px] h-[200px] text-[#FFE9F0]" />
+      </div>
       <div className="max-w-[78.5rem] mx-auto px-6 py-[6.25rem] relative z-10">
-        <div className="absolute top-20 -right-56 z-0 hidden lg:block">
-          <TrevoIcon className="w-[605px] h-[605px] text-[#FFE9F0]" />
-        </div>
         <div className="flex items-center gap-10 flex-col md:flex-row">
           <div>
             <div className="flex items-center gap-4">
@@ -136,7 +136,7 @@ export function AboutSection() {
             </Button>
           </div>
 
-          <div className="w-full md:w-auto hidden lg:block">
+          <div className="w-full md:w-auto">
             <div className="relative h-[300px] md:h-[457px] w-full md:w-[580px] overflow-hidden rounded-lg">
               <div
                 className={`flex h-full transition-transform duration-700 ease-in-out ${
