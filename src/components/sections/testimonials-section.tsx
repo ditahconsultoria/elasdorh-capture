@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react"; // 1. Importar useCallback
 import { TrevoIcon } from "../icons/trevo-icon";
 import { Card, CardDescription, CardHeader } from "../ui/card";
 
@@ -103,9 +103,10 @@ export function TestimonialsSection() {
     setCurrentIndex(groupIndex * itemsPerGroup);
   }
 
-  function nextTestimonial() {
+  // 2. Envolver a função com useCallback
+  const nextTestimonial = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % totalTestimonials);
-  }
+  }, [totalTestimonials]);
 
   function getCurrentGroup() {
     return Math.floor(currentIndex / itemsPerGroup);
@@ -114,13 +115,10 @@ export function TestimonialsSection() {
   useEffect(() => {
     const interval = setInterval(nextTestimonial, 5000);
     return () => clearInterval(interval);
-  }, [totalTestimonials]);
+  }, [nextTestimonial]); // 3. Adicionar a função memorizada ao array de dependências
 
   return (
-    <section
-      id="testimonials"
-      className="w-full"
-    >
+    <section id="testimonials" className="w-full">
       <div className="max-w-[1256px] mx-auto px-6 py-[100px] flex flex-col items-center justify-center">
         <p className="text-[#C40D3A] text-xl md:text-[2rem] font-semibold text-center px-4">
           O que disseram sobre a nossa 1ª Edição.
@@ -148,10 +146,14 @@ export function TestimonialsSection() {
               >
                 <CardHeader className="flex items-start gap-4 flex-col px-0">
                   <div>
-                    <p className="text-[#2E1118] font-semibold">{testimonial.name}</p>
+                    <p className="text-[#2E1118] font-semibold">
+                      {testimonial.name}
+                    </p>
                     <div className="flex items-center gap-2 mt-1">
                       <TrevoIcon className="text-[#C40D3A] w-4 h-4" />
-                      <p className="text-[#C40D3A] font-semibold text-sm">{testimonial.role}</p>
+                      <p className="text-[#C40D3A] font-semibold text-sm">
+                        {testimonial.role}
+                      </p>
                     </div>
                   </div>
                   <CardDescription>
