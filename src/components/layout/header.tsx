@@ -59,7 +59,7 @@ export function Header() {
         <div className="relative lg:w-[4.1106rem] lg:h-[3.75rem] w-12 h-12">
           <Image
             className="absolute"
-            src="./logo.svg" 
+            src="./logo.svg"
             alt="Elas do RH"
             fill
           />
@@ -82,13 +82,12 @@ export function Header() {
         <Link href="#">Fazer parte agora</Link>
       </Button>
 
-      <Button
-        variant="ghost"
+      <button
         className="md:hidden"
         onClick={toggleMenu}
       >
-        {isOpenMenuNavigation ? <RxCross1 size={24} /> : <SlMenu />}
-      </Button>
+        {isOpenMenuNavigation ? <RxCross1 size={24} /> : <SlMenu size={24} />}
+      </button>
 
       {isOpenMenuNavigation && (
         <div className="absolute top-full left-0 right-0 bg-white shadow-lg border-t md:hidden z-50">
