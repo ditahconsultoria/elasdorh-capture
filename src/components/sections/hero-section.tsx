@@ -11,7 +11,7 @@ export const HeroSection = () => {
     >
       <div className="max-w-[78.5rem] mx-auto px-6 py-[13.625rem]">
         <Image
-          src="/hero-banner.svg"
+          src="/hero-banner.jpg"
           alt="Pessoas reunidas"
           fill
           className="object-cover"

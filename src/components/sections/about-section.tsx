@@ -48,13 +48,7 @@ export function AboutSection() {
     },
   ];
 
-  const images = [
-    "/event-picture-1.svg",
-    "/event-picture-2.svg",
-    "/event-picture-3.svg",
-    "/event-picture-4.svg",
-    "/event-picture-5.svg",
-  ];
+  const images = ["/event-1.jpg", "/event-2.jpg", "/event-3.jpg", "/event-4.jpg", "/event-5.jpg"];
 
   const infiniteImages = [...images, images[0]];
 
