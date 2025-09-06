@@ -59,7 +59,7 @@ export function Header() {
         <div className="relative lg:w-[4.1106rem] lg:h-[3.75rem] w-12 h-12">
           <Image
             className="absolute"
-            src="./logo.svg"
+            src="./logo.svg" 
             alt="Elas do RH"
             fill
           />
