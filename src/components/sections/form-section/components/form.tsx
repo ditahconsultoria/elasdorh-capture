@@ -48,7 +48,7 @@ export function Form() {
   }
 
   return (
-    <Card className="border-[#E7E0E2] w-full h-[629px] bg-white z-10">
+    <Card className="border-[#E7E0E2] w-full lg:h-[629px] h-auto bg-white z-10 shadow-none">
       <CardHeader>
         <CardTitle className="text-[#2E1118] text-[22px] font-semibold">Preencha o formulário abaixo!</CardTitle>
       </CardHeader>
@@ -79,7 +79,7 @@ export function Form() {
             {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="lg:grid lg:grid-cols-2 gap-4">
             <div className="flex flex-col gap-[6px]">
               <Label htmlFor="phone">Telefone</Label>
               <Input
@@ -91,7 +91,7 @@ export function Form() {
               {errors.phone && <span className="text-red-500 text-sm">{errors.phone.message}</span>}
             </div>
 
-            <div className="flex flex-col gap-[6px] w-full">
+            <div className="flex flex-col gap-[6px] w-full mt-4 lg:mt-0">
               <Label htmlFor="gender">Gênero</Label>
               <Select
                 value={watch("gender")}
@@ -110,7 +110,7 @@ export function Form() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="lg:grid lg:grid-cols-2 gap-4">
             <div className="flex flex-col gap-[6px]">
               <Label htmlFor="state">Estado - UF</Label>
               <Select
@@ -137,7 +137,7 @@ export function Form() {
               {errors.state && <span className="text-red-500 text-sm">{errors.state.message}</span>}
             </div>
 
-            <div className="flex flex-col gap-[6px]">
+            <div className="flex flex-col gap-[6px] mt-4 lg:mt-0">
               <Label htmlFor="position">Cargo</Label>
               <Select
                 value={watch("position")}
