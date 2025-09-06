@@ -5,10 +5,13 @@ import { FaArrowRightLong } from "react-icons/fa6";
 
 export const HeroSection = () => {
   return (
-    <section className="relative flex items-center justify-center text-center text-white">
+    <section
+      id="hero"
+      className="relative flex items-center justify-center text-center text-white pt-[5.5rem]"
+    >
       <div className="max-w-[78.5rem] mx-auto px-6 py-[13.625rem]">
         <Image
-          src="/hero-banner.svg"
+          src="/hero-banner.jpg"
           alt="Pessoas reunidas"
           fill
           className="object-cover"
@@ -26,7 +29,7 @@ export const HeroSection = () => {
               className="bg-[#C40D3A] hover:bg-[#d21444] text-white rounded-full font-medium h-12 lg:w-48 w-full duration-300"
               asChild
             >
-              <Link href="#">Fazer parte agora</Link>
+              <Link href="#form">Fazer parte agora</Link>
             </Button>
             <Button
               className="lg:w-[165px] w-full"
@@ -34,7 +37,7 @@ export const HeroSection = () => {
               variant="outline"
               size={"lg"}
             >
-              <Link href="#">
+              <Link href="#about">
                 Sobre nós <FaArrowRightLong />
               </Link>
             </Button>

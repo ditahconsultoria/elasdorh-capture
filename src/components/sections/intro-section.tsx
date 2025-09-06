@@ -30,7 +30,7 @@ export const IntroSection = () => {
             asChild
           >
             <Link
-              href="#"
+              href="#form"
               className="inline-flex items-center justify-center gap-2"
             >
               Junte-se a nós <FaArrowRightLong />

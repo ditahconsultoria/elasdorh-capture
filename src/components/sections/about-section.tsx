@@ -48,13 +48,7 @@ export function AboutSection() {
     },
   ];
 
-  const images = [
-    "/event-picture-1.svg",
-    "/event-picture-2.svg",
-    "/event-picture-3.svg",
-    "/event-picture-4.svg",
-    "/event-picture-5.svg",
-  ];
+  const images = ["/event-1.jpg", "/event-2.jpg", "/event-3.jpg", "/event-4.jpg", "/event-5.jpg"];
 
   const infiniteImages = [...images, images[0]];
 
@@ -77,7 +71,10 @@ export function AboutSection() {
   }, [currentImageIndex, images.length]);
 
   return (
-    <section className="w-full bg-pink-50 relative overflow-hidden">
+    <section
+      id="about"
+      className="w-full bg-pink-50 relative overflow-hidden"
+    >
       <div className="absolute lg:top-20 lg:-right-22 z-0 top-[935px] -right-[55px]">
         <TrevoIcon className="lg:w-[605px] lg:h-[605px] w-[200px] h-[200px] text-[#FFE9F0]" />
       </div>
@@ -130,7 +127,7 @@ export function AboutSection() {
               className="text-white rounded-full h-12 w-[225px] mt-12 bg-[#C40D3A] hover:bg-[#d21444] font-medium duration-300"
               asChild
             >
-              <Link href="#">
+              <Link href="#form">
                 Quero fazer parte <FaArrowRightLong />
               </Link>
             </Button>

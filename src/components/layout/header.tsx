@@ -40,9 +40,9 @@ export function Header() {
   const [isOpenMenuNavigation, setIsOpenMenuNavigation] = useState(false);
 
   const navigationItems: NavigationItem[] = [
-    { label: "Início", href: "#", width: "75px" },
-    { label: "Sobre", href: "#", width: "75px" },
-    { label: "Depoimentos", href: "#" },
+    { label: "Início", href: "#hero", width: "75px" },
+    { label: "Sobre", href: "#about", width: "75px" },
+    { label: "Depoimentos", href: "#testimonials" },
   ];
 
   function toggleMenu() {
@@ -54,12 +54,12 @@ export function Header() {
   }
 
   return (
-    <header className="flex items-center justify-between px-4 md:px-24 py-3.5 w-full h-[5.5rem] relative">
+    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-24 py-3.5 w-full h-[5.5rem] bg-white shadow-sm">
       <Link href="/">
         <div className="relative lg:w-[4.1106rem] lg:h-[3.75rem] w-12 h-12">
           <Image
             className="absolute"
-            src="./logo.svg" 
+            src="./logo.svg"
             alt="Elas do RH"
             fill
           />
@@ -79,19 +79,18 @@ export function Header() {
         className="hidden md:flex bg-[#C40D3A] hover:bg-[#d21444] text-white rounded-full font-medium h-12 w-48 duration-300"
         asChild
       >
-        <Link href="#">Fazer parte agora</Link>
+        <Link href="#form">Fazer parte agora</Link>
       </Button>
 
-      <Button
-        variant="ghost"
+      <button
         className="md:hidden"
         onClick={toggleMenu}
       >
-        {isOpenMenuNavigation ? <RxCross1 size={24} /> : <SlMenu />}
-      </Button>
+        {isOpenMenuNavigation ? <RxCross1 size={24} /> : <SlMenu size={24} />}
+      </button>
 
       {isOpenMenuNavigation && (
-        <div className="absolute top-full left-0 right-0 bg-white shadow-lg border-t md:hidden z-50">
+        <div className="absolute top-full left-0 right-0 bg-white shadow-lg border-t border-t-gray-200 md:hidden z-50">
           <nav className="flex flex-col p-4 space-y-2">
             {navigationItems.map((item) => (
               <NavigationButton
@@ -106,7 +105,7 @@ export function Header() {
               asChild
               onClick={closeMenu}
             >
-              <Link href="#">Fazer parte agora</Link>
+              <Link href="#form">Fazer parte agora</Link>
             </Button>
           </nav>
         </div>

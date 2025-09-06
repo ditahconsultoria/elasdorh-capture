@@ -6,7 +6,10 @@ import { PiLinkedinLogoFill } from "react-icons/pi";
 
 export function FormSection() {
   return (
-    <section className="w-full bg-pink-50 relative overflow-hidden">
+    <section
+      id="form"
+      className="w-full bg-pink-50 relative overflow-hidden"
+    >
       <div className="absolute lg:top-5 lg:right-4 z-0 top-[620px] -right-[55px]">
         <TrevoIcon className="lg:w-[331px] lg:h-[331px] w-[200px] h-[200px] text-[#FFE9F0]" />
       </div>
@@ -29,7 +32,9 @@ export function FormSection() {
               <p className="font-medium text-[#2E1118] text-lg ">Siga-nos nas redes sociais:</p>
               <div className="flex items-center gap-4">
                 <Link
-                  href="#"
+                  href="https://instagram.com/elasdorh"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-[#FCE3EC] p-2.5 rounded-lg"
                 >
                   <AiFillInstagram
@@ -38,7 +43,9 @@ export function FormSection() {
                   />
                 </Link>
                 <Link
-                  href="#"
+                  href="https://linkedin.com/company/elasdorh"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-[#FCE3EC] p-2.5 rounded-lg"
                 >
                   <PiLinkedinLogoFill

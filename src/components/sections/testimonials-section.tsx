@@ -69,10 +69,11 @@ const testimonials: Testimonial[] = [
 ];
 
 export function TestimonialsSection() {
-  const [currentGroup, setCurrentGroup] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const itemsPerGroup = isMobile ? 1 : 3;
-  const totalGroups = Math.ceil(testimonials.length / itemsPerGroup);
+  const totalTestimonials = testimonials.length;
+  const totalGroups = Math.ceil(totalTestimonials / itemsPerGroup);
 
   useEffect(() => {
     function checkScreenSize() {
@@ -86,25 +87,40 @@ export function TestimonialsSection() {
   }, []);
 
   function getCurrentTestimonials() {
-    const startIndex = currentGroup * itemsPerGroup;
-    return testimonials.slice(startIndex, startIndex + itemsPerGroup);
+    if (isMobile) {
+      return [testimonials[currentIndex]];
+    }
+
+    const result = [];
+    for (let i = 0; i < 3; i++) {
+      const index = (currentIndex + i) % totalTestimonials;
+      result.push(testimonials[index]);
+    }
+    return result;
   }
 
   function handleDotClick(groupIndex: number) {
-    setCurrentGroup(groupIndex);
+    setCurrentIndex(groupIndex * itemsPerGroup);
   }
 
-  function nextGroup() {
-    setCurrentGroup((prev) => (prev + 1) % totalGroups);
+  function nextTestimonial() {
+    setCurrentIndex((prev) => (prev + 1) % totalTestimonials);
+  }
+
+  function getCurrentGroup() {
+    return Math.floor(currentIndex / itemsPerGroup);
   }
 
   useEffect(() => {
-    const interval = setInterval(nextGroup, 5000);
+    const interval = setInterval(nextTestimonial, 5000);
     return () => clearInterval(interval);
-  }, [totalGroups]);
+  }, [totalTestimonials]);
 
   return (
-    <section className="w-full">
+    <section
+      id="testimonials"
+      className="w-full"
+    >
       <div className="max-w-[1256px] mx-auto px-6 py-[100px] flex flex-col items-center justify-center">
         <p className="text-[#C40D3A] text-xl md:text-[2rem] font-semibold text-center px-4">
           O que disseram sobre a nossa 1ª Edição.
@@ -115,7 +131,7 @@ export function TestimonialsSection() {
 
         <div className="mt-10 w-full">
           <div
-            key={currentGroup}
+            key={currentIndex}
             className="flex gap-4 items-center justify-center animate-in fade-in-0 slide-in-from-bottom-4 duration-500"
           >
             {getCurrentTestimonials().map((testimonial, index) => (
@@ -152,7 +168,7 @@ export function TestimonialsSection() {
                 key={index}
                 onClick={() => handleDotClick(index)}
                 className={`transition-all duration-300 cursor-pointer ${
-                  index === currentGroup
+                  index === getCurrentGroup()
                     ? "w-10 h-2.5 rounded-full bg-[#C40D3A]"
                     : "w-2.5 h-2.5 rounded-full bg-[#E7E0E2] hover:bg-[#C40D3A]/50"
                 }`}
