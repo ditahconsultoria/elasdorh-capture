@@ -90,7 +90,7 @@ export function Header() {
       </button>
 
       {isOpenMenuNavigation && (
-        <div className="absolute top-full left-0 right-0 bg-white shadow-lg border-t md:hidden z-50">
+        <div className="absolute top-full left-0 right-0 bg-white shadow-lg border-t border-t-gray-200 md:hidden z-50">
           <nav className="flex flex-col p-4 space-y-2">
             {navigationItems.map((item) => (
               <NavigationButton
