@@ -121,7 +121,7 @@ export function TestimonialsSection() {
     <section id="testimonials" className="w-full">
       <div className="max-w-[1256px] mx-auto px-6 py-[100px] flex flex-col items-center justify-center">
         <p className="text-[#C40D3A] text-xl md:text-[2rem] font-semibold text-center px-4">
-          O que disseram sobre a nossa 1ª Edição.
+          O que disseram sobre o nosso evento
         </p>
         <p className="text-[#746266] text-base md:text-lg mt-2 text-center px-4">
           Histórias reais de quem viveu essa experiência...
