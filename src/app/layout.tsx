@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import { Toaster } from "react-hot-toast"; // Importação
+import { Toaster } from "react-hot-toast";
+import { Analytics } from "@vercel/analytics/next"
 import "./globals.css";
 
 const poppins = Poppins({
@@ -28,6 +29,7 @@ export default function RootLayout({
         <Toaster position="top-right" /> {/* Adição do Toaster */}
         <div className="flex-1">{children}</div>
       </body>
+      <Analytics />
     </html>
   );
 }
