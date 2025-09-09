@@ -14,6 +14,7 @@ export const HeroSection = () => {
           src="/hero-banner.jpg"
           alt="Pessoas reunidas"
           fill
+          priority
           className="object-cover"
         />
         {/* Overlay escuro */}
