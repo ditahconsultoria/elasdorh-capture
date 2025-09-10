@@ -53,13 +53,8 @@ export async function POST(request: Request) {
       },
     };
 
-    // ADICIONADO PARA DEBUG: Logar o payload que será enviado
-    console.log(
-      "Enviando para ActiveCampaign:",
-      JSON.stringify(contactPayload, null, 2)
-    );
-
-    const response = await fetch(`${apiUrl}/api/3/contacts`, {
+    // ALTERADO: Usando o endpoint de sincronização
+    const response = await fetch(`${apiUrl}/api/3/contact/sync`, {
       method: "POST",
       headers: {
         "Api-Token": apiKey,
@@ -76,10 +71,6 @@ export async function POST(request: Request) {
         { status: response.status }
       );
     }
-
-    // ADICIONADO PARA DEBUG: Logar a resposta de SUCESSO
-    const responseData = await response.json();
-    console.log("Resposta de SUCESSO do ActiveCampaign:", responseData);
 
     return NextResponse.json(
       { message: "Inscrição realizada com sucesso!" },
