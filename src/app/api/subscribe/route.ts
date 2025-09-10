@@ -12,11 +12,20 @@ const formSectionSchema = z.object({
 });
 
 export async function POST(request: Request) {
+  const startTime = Date.now();
+  
   try {
     const apiKey = process.env.ACTIVE_CAMPAIGN_API_KEY;
     const apiUrl = process.env.ACTIVE_CAMPAIGN_API_URL;
 
+    // Log inicial para diagnóstico
+    console.log(`[${new Date().toISOString()}] 🚀 Iniciando processo de inscrição`);
+    console.log(`📍 Environment: ${process.env.NODE_ENV}`);
+    console.log(`🔗 API URL configurada: ${apiUrl ? 'SIM' : 'NÃO'}`);
+    console.log(`🔑 API Key configurada: ${apiKey ? 'SIM' : 'NÃO'}`);
+
     if (!apiKey || !apiUrl) {
+      console.error("❌ Credenciais não configuradas");
       return NextResponse.json(
         { error: "Credenciais da API não configuradas no servidor." },
         { status: 500 }
@@ -24,17 +33,23 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
-    const parsedData = formSectionSchema.safeParse(body);
+    console.log(`📝 Dados recebidos:`, {
+      name: body.name,
+      email: body.email,
+      phone: body.phone,
+      // Não loggar dados sensíveis completamente
+    });
 
+    const parsedData = formSectionSchema.safeParse(body);
     if (!parsedData.success) {
+      console.error("❌ Dados inválidos:", parsedData.error.flatten());
       return NextResponse.json(
         { error: "Dados inválidos.", details: parsedData.error.flatten() },
         { status: 400 }
       );
     }
 
-    const { name, email, phone, gender, state, position, company } =
-      parsedData.data;
+    const { name, email, phone, gender, state, position, company } = parsedData.data;
     const [firstName, ...lastNameParts] = name.split(" ");
     const lastName = lastNameParts.join(" ");
 
@@ -42,7 +57,7 @@ export async function POST(request: Request) {
       contact: {
         email: email,
         firstName: firstName,
-        lastName: lastName,
+        lastName: lastName || "", // Garantir que não seja undefined
         phone: phone,
         fieldValues: [
           { field: "2", value: company },
@@ -53,33 +68,109 @@ export async function POST(request: Request) {
       },
     };
 
-    // ALTERADO: Usando o endpoint de sincronização
-    const response = await fetch(`${apiUrl}/api/3/contact/sync`, {
-      method: "POST",
-      headers: {
-        "Api-Token": apiKey,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(contactPayload),
-    });
+    console.log(`📦 Payload preparado para Active Campaign:`, JSON.stringify(contactPayload, null, 2));
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error("Erro na API do ActiveCampaign:", errorData);
+    const requestUrl = `${apiUrl}/api/3/contact/sync`;
+    console.log(`🎯 URL da requisição: ${requestUrl}`);
+
+    // Fazendo a requisição com timeout e headers mais robustos
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
+
+    try {
+      const response = await fetch(requestUrl, {
+        method: "POST",
+        headers: {
+          "Api-Token": apiKey,
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "User-Agent": "NextJS-ActiveCampaign-Integration/1.0",
+        },
+        body: JSON.stringify(contactPayload),
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      const responseTime = Date.now() - startTime;
+      console.log(`⏱️  Tempo de resposta: ${responseTime}ms`);
+      console.log(`📊 Status da resposta: ${response.status}`);
+      console.log(`📋 Headers da resposta:`, Object.fromEntries(response.headers.entries()));
+
+      // Sempre capturar o corpo da resposta
+      const responseText = await response.text();
+      console.log(`📄 Corpo da resposta (raw):`, responseText);
+
+      let responseData;
+      try {
+        responseData = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("❌ Erro ao parsear resposta JSON:", parseError);
+        responseData = { raw: responseText };
+      }
+
+      if (!response.ok) {
+        console.error(`❌ Erro na API do ActiveCampaign (${response.status}):`, responseData);
+        
+        // Tratamento específico para diferentes tipos de erro
+        let errorMessage = "Falha ao registrar o contato.";
+        if (response.status === 429) {
+          errorMessage = "Muitas requisições. Tente novamente em alguns minutos.";
+        } else if (response.status === 401) {
+          errorMessage = "Credenciais inválidas para Active Campaign.";
+        } else if (response.status === 422) {
+          errorMessage = "Dados rejeitados pelo Active Campaign.";
+        }
+
+        return NextResponse.json(
+          { 
+            error: errorMessage, 
+            details: responseData,
+            status: response.status,
+            timestamp: new Date().toISOString()
+          },
+          { status: response.status }
+        );
+      }
+
+      console.log(`✅ Contato registrado com sucesso:`, responseData);
       return NextResponse.json(
-        { error: "Falha ao registrar o contato.", details: errorData },
-        { status: response.status }
+        { 
+          message: "Inscrição realizada com sucesso!",
+          contactId: responseData?.contact?.id,
+          timestamp: new Date().toISOString()
+        },
+        { status: 200 }
       );
+
+    } catch (fetchError) {
+      clearTimeout(timeoutId);
+      
+      if (fetchError.name === 'AbortError') {
+        console.error("❌ Timeout na requisição para Active Campaign");
+        return NextResponse.json(
+          { error: "Timeout na comunicação com Active Campaign. Tente novamente." },
+          { status: 408 }
+        );
+      }
+      
+      throw fetchError; // Re-throw para o catch externo
     }
 
-    return NextResponse.json(
-      { message: "Inscrição realizada com sucesso!" },
-      { status: 200 }
-    );
   } catch (error) {
-    console.error("Erro interno do servidor:", error);
+    const responseTime = Date.now() - startTime;
+    console.error(`❌ Erro interno do servidor (${responseTime}ms):`, {
+      message: error?.message,
+      stack: error?.stack,
+      name: error?.name,
+      timestamp: new Date().toISOString()
+    });
+
     return NextResponse.json(
-      { error: "Ocorreu um erro inesperado." },
+      { 
+        error: "Ocorreu um erro inesperado.",
+        timestamp: new Date().toISOString()
+      },
       { status: 500 }
     );
   }
