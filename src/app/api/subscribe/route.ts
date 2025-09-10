@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
-// Schema atualizado para incluir TODOS os campos do formulário
 const formSectionSchema = z.object({
   name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
   email: z.string().email("E-mail inválido"),
@@ -39,7 +38,6 @@ export async function POST(request: Request) {
     const [firstName, ...lastNameParts] = name.split(" ");
     const lastName = lastNameParts.join(" ");
 
-    // Payload final com as IDs corretas dos campos personalizados
     const contactPayload = {
       contact: {
         email: email,
@@ -47,13 +45,19 @@ export async function POST(request: Request) {
         lastName: lastName,
         phone: phone,
         fieldValues: [
-          { field: "2", value: company }, // ID do campo Empresa
-          { field: "4", value: gender }, // ID do campo Gênero
-          { field: "5", value: position }, // ID do campo Cargo
-          { field: "6", value: state }, // ID do campo Estado
+          { field: "2", value: company },
+          { field: "4", value: gender },
+          { field: "5", value: position },
+          { field: "6", value: state },
         ],
       },
     };
+
+    // ADICIONADO PARA DEBUG: Logar o payload que será enviado
+    console.log(
+      "Enviando para ActiveCampaign:",
+      JSON.stringify(contactPayload, null, 2)
+    );
 
     const response = await fetch(`${apiUrl}/api/3/contacts`, {
       method: "POST",
@@ -72,6 +76,10 @@ export async function POST(request: Request) {
         { status: response.status }
       );
     }
+
+    // ADICIONADO PARA DEBUG: Logar a resposta de SUCESSO
+    const responseData = await response.json();
+    console.log("Resposta de SUCESSO do ActiveCampaign:", responseData);
 
     return NextResponse.json(
       { message: "Inscrição realizada com sucesso!" },
