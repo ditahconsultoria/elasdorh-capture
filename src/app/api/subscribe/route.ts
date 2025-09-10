@@ -37,7 +37,6 @@ export async function POST(request: Request) {
       name: body.name,
       email: body.email,
       phone: body.phone,
-      // Não loggar dados sensíveis completamente
     });
 
     const parsedData = formSectionSchema.safeParse(body);
@@ -57,7 +56,7 @@ export async function POST(request: Request) {
       contact: {
         email: email,
         firstName: firstName,
-        lastName: lastName || "", // Garantir que não seja undefined
+        lastName: lastName || "",
         phone: phone,
         fieldValues: [
           { field: "2", value: company },
@@ -75,7 +74,7 @@ export async function POST(request: Request) {
 
     // Fazendo a requisição com timeout e headers mais robustos
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
 
     try {
       const response = await fetch(requestUrl, {
@@ -97,7 +96,6 @@ export async function POST(request: Request) {
       console.log(`📊 Status da resposta: ${response.status}`);
       console.log(`📋 Headers da resposta:`, Object.fromEntries(response.headers.entries()));
 
-      // Sempre capturar o corpo da resposta
       const responseText = await response.text();
       console.log(`📄 Corpo da resposta (raw):`, responseText);
 
@@ -112,7 +110,6 @@ export async function POST(request: Request) {
       if (!response.ok) {
         console.error(`❌ Erro na API do ActiveCampaign (${response.status}):`, responseData);
         
-        // Tratamento específico para diferentes tipos de erro
         let errorMessage = "Falha ao registrar o contato.";
         if (response.status === 429) {
           errorMessage = "Muitas requisições. Tente novamente em alguns minutos.";
@@ -146,7 +143,8 @@ export async function POST(request: Request) {
     } catch (fetchError) {
       clearTimeout(timeoutId);
       
-      if (fetchError.name === 'AbortError') {
+      // Type guard para verificar se é AbortError
+      if (fetchError instanceof Error && fetchError.name === 'AbortError') {
         console.error("❌ Timeout na requisição para Active Campaign");
         return NextResponse.json(
           { error: "Timeout na comunicação com Active Campaign. Tente novamente." },
@@ -154,15 +152,15 @@ export async function POST(request: Request) {
         );
       }
       
-      throw fetchError; // Re-throw para o catch externo
+      throw fetchError;
     }
 
   } catch (error) {
     const responseTime = Date.now() - startTime;
     console.error(`❌ Erro interno do servidor (${responseTime}ms):`, {
-      message: error?.message,
-      stack: error?.stack,
-      name: error?.name,
+      message: error instanceof Error ? error.message : 'Erro desconhecido',
+      stack: error instanceof Error ? error.stack : undefined,
+      name: error instanceof Error ? error.name : 'Unknown',
       timestamp: new Date().toISOString()
     });
 
