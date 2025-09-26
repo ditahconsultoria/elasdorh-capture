@@ -11,10 +11,32 @@ const subscribeSchema = z.object({
   company: z.string().min(1, 'Empresa é obrigatória'),
 })
 
-type SubscribeData = z.infer<typeof subscribeSchema>
+// Tipos específicos para ActiveCampaign
+interface ContactData {
+  email: string
+  firstName: string
+  lastName: string
+  phone: string
+  fieldValues: Array<{
+    field: string
+    value: string
+  }>
+}
+
+interface ActiveCampaignContactResponse {
+  contact?: {
+    id: string
+  }
+}
+
+interface ActiveCampaignListResponse {
+  contactList?: {
+    id: string
+  }
+}
 
 // Função para criar/sincronizar contato
-async function syncContact(contactData: any) {
+async function syncContact(contactData: ContactData): Promise<ActiveCampaignContactResponse> {
   const response = await fetch(`${process.env.ACTIVE_CAMPAIGN_API_URL}/api/3/contact/sync`, {
     method: 'POST',
     headers: {
@@ -35,7 +57,7 @@ async function syncContact(contactData: any) {
 }
 
 // Função para adicionar contato à lista específica
-async function addContactToList(contactId: string, listId: string) {
+async function addContactToList(contactId: string, listId: string): Promise<ActiveCampaignListResponse> {
   const response = await fetch(`${process.env.ACTIVE_CAMPAIGN_API_URL}/api/3/contactLists`, {
     method: 'POST',
     headers: {
@@ -92,7 +114,7 @@ export async function POST(request: NextRequest) {
 
     // Mapeamento dos dados para o ActiveCampaign - CORRIGIDO
     const nameParts = validatedData.name.split(' ')
-    const contactData = {
+    const contactData: ContactData = {
       email: validatedData.email,
       firstName: nameParts[0] || '',
       lastName: nameParts.slice(1).join(' ') || '',
