@@ -8,13 +8,13 @@ export function Footer() {
           © 2025 ElasDoRH - Todos os direitos reservados
         </p>
         <p className="text-white text-sm">
-          Desenvolvido com 💜 por{" "}
+          Desenvolvido por{" "}
           <Link
             href="https://www.kodeseat.com/"
             target="_blank"
             className="font-semibold text-white hover:underline text-sm"
           >
-            Kodeseat
+            Kodeseat Tech House
           </Link>
         </p>
       </div>
